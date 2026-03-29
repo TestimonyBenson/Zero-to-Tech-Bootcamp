@@ -285,62 +285,53 @@ export function Contact() {
 
       {/* Form Modal */}
       {showForm && (
-        <div 
-          ref={formRef}
-          className="absolute inset-0 z-40 bg-black/95 flex items-center justify-center p-6"
-        >
-          <div className="w-full max-w-md">
-            <div className="flex justify-between items-center mb-8">
-              <h3 className="text-2xl font-bold text-white">Reserve Your Spot</h3>
-              <button 
-                onClick={() => setShowForm(false)}
-                className="text-white/60 hover:text-white transition-colors"
-              >
-                ✕
-              </button>
-            </div>
-            
-            <form className="space-y-6">
-              <div>
-                <label className="text-mono text-white/60 block mb-2">{contactConfig.nameLabel}</label>
-                <input 
-                  type="text" 
-                  className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:border-[#39FF14] focus:outline-none transition-colors"
-                  placeholder="Your full name"
-                />
-              </div>
-              
-              <div>
-                <label className="text-mono text-white/60 block mb-2">{contactConfig.emailLabel}</label>
-                <input 
-                  type="email" 
-                  className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:border-[#39FF14] focus:outline-none transition-colors"
-                  placeholder="your@email.com"
-                />
-              </div>
-              
-              <div>
-                <label className="text-mono text-white/60 block mb-2">{contactConfig.projectTypeLabel}</label>
-                <select className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:border-[#39FF14] focus:outline-none transition-colors">
-                  <option value="">{contactConfig.projectTypePlaceholder}</option>
-                  {contactConfig.projectTypeOptions.map((option) => (
-                    <option key={option.value} value={option.value}>{option.label}</option>
-                  ))}
-                </select>
-              </div>
-              
-              <button 
-                type="submit" 
-                className="w-full btn-neon-filled mt-4"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert('Thank you! We will send you payment details shortly.');
-                  setShowForm(false);
-                }}
-              >
-                Complete Registration
-              </button>
-            </form>
+        <form 
+  action="https://formspree.io/f/xpqopgwn" 
+  method="POST" 
+  className="space-y-6"
+>
+  <div>
+    <label className="text-mono text-white/60 block mb-2">{contactConfig.nameLabel}</label>
+    <input 
+      type="text" 
+      name="name" // Important: Formspree needs this
+      required
+      className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:border-[#39FF14] focus:outline-none transition-colors"
+      placeholder="Your full name"
+    />
+  </div>
+
+  <div>
+    <label className="text-mono text-white/60 block mb-2">{contactConfig.emailLabel}</label>
+    <input 
+      type="email" 
+      name="email" // Important: Formspree needs this
+      required
+      className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:border-[#39FF14] focus:outline-none transition-colors"
+      placeholder="your@email.com"
+    />
+  </div>
+
+  <div>
+    <label className="text-mono text-white/60 block mb-2">{contactConfig.projectTypeLabel}</label>
+    <select 
+      name="track" // Important: Formspree needs this
+      className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:border-[#39FF14] focus:outline-none transition-colors"
+    >
+      <option value="">{contactConfig.projectTypePlaceholder}</option>
+      {contactConfig.projectTypeOptions.map((option) => (
+        <option key={option.value} value={option.value}>{option.label}</option>
+      ))}
+    </select>
+  </div>
+
+  <button 
+    type="submit" 
+    className="w-full btn-neon-filled mt-4"
+  >
+    Complete Registration
+  </button>
+</form>
           </div>
         </div>
       )}
